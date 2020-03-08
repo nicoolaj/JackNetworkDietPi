@@ -2,7 +2,7 @@
 
 Audio transmitter over network using 2 RaspberryPi and Hifiberry DAC+ADC
 
-## Mandatory part
+## Basic install
 
 ### Package installation and configuration
 
@@ -16,13 +16,13 @@ apt-get update
 
 ```bash
 echo "Answer YES for realtime"
-apt-get -y install jackd2 jack-utils
+apt-get -y install jackd2 jack-tools
 ```
 
 #### Install VideoLanClient
 
 ```bash
-apt-get -y install jackd2 jack-utils vlc vlc-plugin-jack
+apt-get -y install vlc vlc-plugin-jack
 sed -i 's/geteuid/getppid/' /usr/bin/vlc
 ```
 
