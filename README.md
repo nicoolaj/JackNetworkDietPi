@@ -2,52 +2,18 @@
 
 Audio transmitter over network using 2 RaspberryPi and Hifiberry DAC+ADC
 
-## Basic install
+## Long story mode
 
-### Package installation and configuration
+My TV, and gaming stations are too far from my Audio Receiver. I can't install multiples wires to connect them.
 
-#### update available apt packages
+I bought an audio-video input selector with one output (Video + Left-Audio + Right-Audio)
 
-```bash
-apt-get update
-```
+I Use the TV to display the video. The sound is captured by a RaspberryPiHat [HifiBerry DAC+ ADC](https://www.hifiberry.com/shop/boards/hifiberry-dac-adc/). The RaspberryPi is connected to the network via an ethernet cable.
 
-#### Install Jackd and utils
+I have a second RaspberryPi connected to my audio-receiver. (For a better quality, Choose to use a [HifiBerry DAC+ ADC](https://www.hifiberry.com/shop/boards/hifiberry-dac-adc/) to render the audio and be able to aquire other audio sources in the future such as my turntable. This RaspberryPi is also connected to the network using a ethernet cable.
 
-```bash
-echo "Answer YES for realtime"
-apt-get -y install jackd2 jack-tools
-```
+Both RaspberryPi are using [Jack-Deamon](https://jackaudio.org/) to capture/play the sound.
 
-#### Install VideoLanClient
+## Topology
 
-```bash
-apt-get -y install vlc vlc-plugin-jack
-sed -i 's/geteuid/getppid/' /usr/bin/vlc
-```
-
-### Master and slave specificities
-
-#### Master _(Only)_
-
-```bash
-cat master.sh >> /var/lib/dietpi/dietpi-autostart/custom.sh
-```
-
-#### Slave _(Only)_
-
-```bash
-cat slave.sh >> /var/lib/dietpi/dietpi-autostart/custom.sh
-```
-
-## Optional packages
-
-```bash
-apt-get install -y \
-    vim exuberant-ctags \
-    bash-completion \
-    curl wget \
-    xz-utils tar bzip2 \
-    libnss-mdns avahi-daemon \
-    snetz
-```
+To connect both Jack server I choose [NetJack2](https://github.com/jackaudio/jackaudio.github.com/wiki/WalkThrough_User_NetJack2). The server is on the audioRecever side. On the TV side is a client.
